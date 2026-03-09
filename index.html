@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lydia â Video Editor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@1,300;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ââ Reset & Base ââââââââââââââââââââââââââââââââ */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg:       #0C0C0C;
+      --bg2:      #111111;
+      --bg3:      #171717;
+      --grey-d:   #282828;
+      --grey-m:   #646464;
+      --grey-l:   #A8A8A8;
+      --white:    #E8E8E8;   /* slightly off-white â kills the harsh halation */
+      --blue-deep:   #001040;   /* dark navy â used for bg blocks */
+      --blue-mid:    #0044BB;   /* strong mid-blue */
+      --blue-bright: #0088FF;   /* electric â main CTA */
+      --blue-light:  #44CCFF;   /* cyan-ish â tags & light accents */
+      --blue-glow:   rgba(0,136,255,0.10);
+      --accent:      #0088FF;
+      --accent2:     #0044BB;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ââ Scrollbar âââââââââââââââââââââââââââââââââââ */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+
+    /* ââ Nav âââââââââââââââââââââââââââââââââââââââââ */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.4rem 3rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(12px);
+    }
+    .nav-logo {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 1.3rem;
+      letter-spacing: 0.12em;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--grey-l);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-cta {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--white);
+      text-decoration: none;
+      border: 1px solid var(--accent);
+      padding: 0.5rem 1.2rem;
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-cta:hover { background: var(--accent); color: var(--white); }
+
+    /* ââ Hero ââââââââââââââââââââââââââââââââââââââââ */
+    .hero {
+      height: 100vh;
+      max-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr;
+      padding-top: 80px;
+      padding-bottom: 130px; /* matches old stats bar height */
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 2rem 3rem 3rem;
+      border-right: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .hero-eyebrow {
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--blue-light);
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-name {
+      font-family: 'Bebas Neue', cursive;
+      font-size: clamp(5rem, 11vw, 9rem);
+      line-height: 0.92;
+      letter-spacing: 0.02em;
+      color: var(--white);
+      margin-bottom: 0.6rem;
+    }
+
+    .hero-script {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 2.2rem;
+      color: var(--grey-l);
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-desc {
+      font-size: 0.85rem;
+      line-height: 1.8;
+      color: var(--grey-m);
+      max-width: 380px;
+      margin-bottom: 3rem;
+    }
+
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      background: var(--accent);
+      color: var(--white);
+      padding: 0.9rem 2rem;
+      transition: background 0.2s, transform 0.15s;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: var(--accent2); transform: translateY(-1px); }
+    .btn-secondary {
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--white);
+      border: 1px solid var(--grey-d);
+      padding: 0.9rem 2rem;
+      transition: border-color 0.2s, transform 0.15s;
+      display: inline-block;
+    }
+    .btn-secondary:hover { border-color: var(--white); transform: translateY(-1px); }
+
+    .hero-right {
+      position: relative;
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+    }
+
+    .hero-img-top {
+      background: var(--bg3);
+      overflow: hidden;
+      position: relative;
+    }
+    .hero-img-top::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(0,16,64,0.55) 0%, rgba(0,68,187,0.12) 60%, transparent 100%);
+    }
+
+    .hero-img-bottom {
+      background: var(--grey-d);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    /* placeholder rects for mockup images */
+    .img-placeholder {
+      width: 100%; height: 100%;
+      background: var(--bg3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.65rem; letter-spacing: 0.2em; color: var(--grey-m);
+      text-transform: uppercase;
+    }
+    .img-placeholder.dark  { background: #0F0F0F; }
+    .img-placeholder.mid   { background: #1A1A1A; }
+    .img-placeholder.label {
+      position: absolute; bottom: 1rem; left: 1rem;
+      background: none; height: auto; width: auto;
+      font-size: 0.6rem; color: var(--grey-l); letter-spacing: 0.18em;
+    }
+
+    /* Stats bar removed */
+
+    /* ââ Section shared ââââââââââââââââââââââââââââââ */
+    section { padding: 7rem 3rem; }
+    .section-tag {
+      font-size: 0.6rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: 'Bebas Neue', cursive;
+      font-size: clamp(3.5rem, 7vw, 6rem);
+      line-height: 0.95;
+      letter-spacing: 0.02em;
+      color: var(--white);
+    }
+
+    /* ââ Works âââââââââââââââââââââââââââââââââââââââ */
+    #works { background: var(--bg); border-top: 1px solid rgba(0,136,255,0.15); }
+
+    .works-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 4rem;
+    }
+    .works-header p {
+      font-size: 0.8rem;
+      color: var(--grey-m);
+      max-width: 300px;
+      line-height: 1.7;
+      padding-bottom: 0.3rem;
+    }
+
+    .works-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: rgba(255,255,255,0.06);
+    }
+
+    .work-item {
+      background: var(--bg);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      group: true;
+    }
+
+    .work-thumb {
+      aspect-ratio: 16/9;
+      background: var(--bg3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .work-thumb-inner {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.4s ease;
+    }
+    .work-item:hover .work-thumb-inner { transform: scale(1.03); }
+
+    .play-btn {
+      width: 52px; height: 52px;
+      border: 1px solid rgba(255,255,255,0.4);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s, border-color 0.2s;
+      position: absolute;
+      bottom: 1rem; right: 1rem;
+    }
+    .work-item:hover .play-btn {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+    .play-btn svg { width: 16px; height: 16px; fill: white; margin-left: 3px; }
+
+    .work-info {
+      padding: 1.4rem 1.4rem 1.8rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+    .work-type {
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--blue-light);
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+    .work-title {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 1.5rem;
+      letter-spacing: 0.04em;
+      color: var(--white);
+    }
+    .work-meta {
+      font-size: 0.65rem;
+      color: var(--grey-m);
+      letter-spacing: 0.12em;
+      text-align: right;
+    }
+
+    /* work thumb colour fills â multi-tone blues */
+    .fill-1 { background: linear-gradient(135deg, #000A22 0%, #001554 50%, #002280 100%); }
+    .fill-2 { background: linear-gradient(145deg, #001040 0%, #0044BB 60%, #0066EE 100%); }
+    .fill-3 { background: linear-gradient(135deg, #080C14 0%, #0A1628 60%, #0A2050 100%); }
+    .fill-4 { background: linear-gradient(160deg, #001040 0%, #002277 40%, #0088FF 100%); }
+
+    .fill-1 .work-thumb-inner::before,
+    .fill-2 .work-thumb-inner::before,
+    .fill-3 .work-thumb-inner::before,
+    .fill-4 .work-thumb-inner::before {
+      content: attr(data-label);
+      font-family: 'Bebas Neue', cursive;
+      font-size: 4rem;
+      color: rgba(255,255,255,0.06);
+      letter-spacing: 0.1em;
+    }
+
+    /* ââ About âââââââââââââââââââââââââââââââââââââââ */
+    #about {
+      background: var(--bg2);
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      margin-top: 4rem;
+    }
+
+    .about-left p {
+      font-size: 0.9rem;
+      line-height: 1.9;
+      color: var(--grey-l);
+      margin-bottom: 1.5rem;
+    }
+
+    .about-pull {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 2rem;
+      color: var(--white);
+      line-height: 1.35;
+      border-left: 3px solid var(--blue-bright);
+      background: linear-gradient(90deg, var(--blue-glow) 0%, transparent 80%);
+      padding: 1rem 1.5rem;
+      margin: 2.5rem 0;
+    }
+
+    .tools-list {
+      display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 2rem;
+    }
+    .tool-tag {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border: 1px solid var(--grey-d);
+      color: var(--grey-l);
+      padding: 0.4rem 0.9rem;
+    }
+
+    .about-right {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    .skill-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding-bottom: 1.2rem;
+    }
+    .skill-name {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 1.4rem;
+      letter-spacing: 0.04em;
+    }
+    .skill-bar-track {
+      width: 160px;
+      height: 1px;
+      background: var(--grey-d);
+      position: relative;
+    }
+    .skill-bar-fill {
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      background: var(--accent);
+      height: 1px;
+    }
+    .skill-pct {
+      font-size: 0.65rem;
+      color: var(--grey-m);
+      letter-spacing: 0.1em;
+      min-width: 2.5rem;
+      text-align: right;
+    }
+
+    /* ââ Services ââââââââââââââââââââââââââââââââââââ */
+    #services {
+      background: var(--bg);
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(255,255,255,0.06);
+      margin-top: 4rem;
+    }
+
+    .service-card {
+      background: var(--bg);
+      padding: 2.5rem 2rem;
+      border: none;
+      transition: background 0.25s;
+    }
+    .service-card:hover { background: var(--bg3); }
+
+    .service-num {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 0.9rem;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 1.5rem;
+    }
+    .service-name {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 1.8rem;
+      letter-spacing: 0.04em;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+    .service-desc {
+      font-size: 0.8rem;
+      line-height: 1.8;
+      color: var(--grey-m);
+    }
+
+    /* ââ Contact âââââââââââââââââââââââââââââââââââââ */
+    #contact {
+      background: var(--bg2);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      text-align: center;
+      padding: 8rem 3rem;
+    }
+
+    #contact .section-title {
+      font-size: clamp(4rem, 9vw, 8rem);
+      margin: 1rem 0 2rem;
+    }
+
+    #contact p {
+      font-size: 0.9rem;
+      color: var(--grey-m);
+      margin-bottom: 3rem;
+      max-width: 440px;
+      margin-left: auto; margin-right: auto;
+      line-height: 1.8;
+    }
+
+    .contact-mail {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 1.8rem;
+      letter-spacing: 0.06em;
+      color: var(--white);
+      text-decoration: none;
+      border-bottom: 1px solid var(--accent);
+      padding-bottom: 0.2rem;
+      display: inline-block;
+      margin-bottom: 4rem;
+      transition: color 0.2s;
+    }
+    .contact-mail:hover { color: var(--accent); }
+
+    .social-row { display: flex; justify-content: center; gap: 2rem; }
+    .social-link {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--grey-m);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .social-link:hover { color: var(--white); }
+
+    /* ââ Footer ââââââââââââââââââââââââââââââââââââââ */
+    footer {
+      padding: 2rem 3rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      color: var(--grey-d);
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <a class="nav-logo" href="#">LJ &nbsp;â&nbsp; VIDEO EDITOR</a>
+    <ul class="nav-links">
+      <li><a href="#works">Works</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+    </ul>
+    <a class="nav-cta" href="#contact">Let's work â</a>
+  </nav>
+
+  <!-- Hero -->
+  <div class="hero">
+
+    <div class="hero-left">
+      <span class="hero-eyebrow">Video Editor &nbsp;/&nbsp; Social Media &amp; YouTube</span>
+
+      <h1 class="hero-name">LYDIA</h1>
+      <span class="hero-script">video editor.</span>
+
+      <p class="hero-desc">
+        Crafting fast-paced social media edits and cinematic long-form
+        content that keeps audiences engaged â from brand Reels to
+        full-length YouTube videos. Based in Sweden &nbsp;Â·&nbsp; Available remotely worldwide.
+      </p>
+
+      <div class="hero-btns">
+        <a class="btn-primary" href="#works">View my work â</a>
+        <a class="btn-secondary" href="#contact">Get in touch</a>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-img-top" style="position:relative;">
+        <div class="img-placeholder dark" style="height:100%;">
+          <!-- Your portrait photo goes here -->
+          <span style="font-family:'Bebas Neue',cursive; font-size:5rem; color:rgba(255,255,255,0.04); letter-spacing:0.08em;">LYDIA</span>
+        </div>
+        <span class="img-placeholder label">Available for remote work</span>
+      </div>
+      <div class="hero-img-bottom">
+        <div class="img-placeholder mid" style="position:relative; overflow:hidden;">
+          <span style="font-family:'Bebas Neue',cursive; font-size:3rem; color:rgba(255,255,255,0.05);">EDIT</span>
+        </div>
+        <div style="background:linear-gradient(160deg,#001040 0%,#0044BB 55%,#0088FF 100%); display:flex; align-items:center; justify-content:center; flex-direction:column; gap:0.3rem;">
+          <span style="font-family:'Bebas Neue',cursive; font-size:2.2rem; letter-spacing:0.06em; color:rgba(255,255,255,0.95); line-height:1;">DAVINCI</span>
+          <span style="font-family:'Bebas Neue',cursive; font-size:2.2rem; letter-spacing:0.06em; color:rgba(255,255,255,0.95); line-height:1;">RESOLVE</span>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+  <!-- Works -->
+  <section id="works">
+    <div class="works-header">
+      <div>
+        <span class="section-tag">Selected Work</span>
+        <h2 class="section-title">MY<br>WORKS</h2>
+      </div>
+      <p>A curated selection of social media edits and long-form content â each built to drive engagement and tell a visual story.</p>
+    </div>
+
+    <div class="works-grid">
+
+      <div class="work-item">
+        <div class="work-thumb fill-1">
+          <div class="work-thumb-inner" data-label="BRAND">
+            <!-- Embed YouTube video here: replace the div with an iframe -->
+            <!-- <iframe width="100%" height="100%" src="https://www.youtube.com/embed/YOUR_ID" frameborder="0" allowfullscreen></iframe> -->
+          </div>
+          <div class="play-btn">
+            <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+          </div>
+        </div>
+        <div class="work-info">
+          <div>
+            <span class="work-type">Social Media / Reels</span>
+            <div class="work-title">Brand Reels Edit</div>
+          </div>
+          <div class="work-meta">
+            DaVinci Resolve<br>2026
+          </div>
+        </div>
+      </div>
+
+      <div class="work-item">
+        <div class="work-thumb fill-2">
+          <div class="work-thumb-inner" data-label="SPEED">
+          </div>
+          <div class="play-btn">
+            <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+          </div>
+        </div>
+        <div class="work-info">
+          <div>
+            <span class="work-type">Social Media / Montage</span>
+            <div class="work-title">Speed Ramp Montage</div>
+          </div>
+          <div class="work-meta">
+            DaVinci Resolve<br>2026
+          </div>
+        </div>
+      </div>
+
+      <div class="work-item">
+        <div class="work-thumb fill-3">
+          <div class="work-thumb-inner" data-label="YOUTUBE">
+          </div>
+          <div class="play-btn">
+            <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+          </div>
+        </div>
+        <div class="work-info">
+          <div>
+            <span class="work-type">YouTube / Long-form</span>
+            <div class="work-title">Interview Edit</div>
+          </div>
+          <div class="work-meta">
+            DaVinci Resolve<br>2026
+          </div>
+        </div>
+      </div>
+
+      <div class="work-item">
+        <div class="work-thumb fill-4">
+          <div class="work-thumb-inner" data-label="PROMO">
+          </div>
+          <div class="play-btn">
+            <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+          </div>
+        </div>
+        <div class="work-info">
+          <div>
+            <span class="work-type">Brand / Promo</span>
+            <div class="work-title">Product Promo Film</div>
+          </div>
+          <div class="work-meta">
+            DaVinci Resolve<br>2026
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <span class="section-tag">Who I Am</span>
+    <h2 class="section-title">ABOUT<br>ME</h2>
+
+    <div class="about-grid">
+      <div class="about-left">
+        <p>
+          I'm Lydia, a video editor based in Sweden with a passion for fast-paced
+          storytelling and cinematic visual language. I specialize in social media content â
+          Reels, TikToks, and YouTube Shorts â as well as long-form YouTube edits that hold
+          audiences from first frame to last.
+        </p>
+        <div class="about-pull">
+          "Every frame is a decision. Every cut is a statement."
+        </div>
+        <p>
+          I work primarily in DaVinci Resolve, bringing a sharp eye for pacing, color grading,
+          and motion â translating raw footage into content that actually converts.
+          Available for full-time remote positions.
+        </p>
+        <div class="tools-list">
+          <span class="tool-tag">DaVinci Resolve</span>
+          <span class="tool-tag">Color Grading</span>
+          <span class="tool-tag">Social Media</span>
+          <span class="tool-tag">YouTube</span>
+          <span class="tool-tag">Motion Text</span>
+          <span class="tool-tag">Audio Sync</span>
+          <span class="tool-tag">Captions</span>
+        </div>
+      </div>
+
+      <div class="about-right">
+        <div class="skill-row">
+          <span class="skill-name">VIDEO EDITING</span>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="width:82%"></div></div>
+          <span class="skill-pct">82%</span>
+        </div>
+        <div class="skill-row">
+          <span class="skill-name">COLOR GRADING</span>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="width:70%"></div></div>
+          <span class="skill-pct">70%</span>
+        </div>
+        <div class="skill-row">
+          <span class="skill-name">MOTION TEXT</span>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="width:65%"></div></div>
+          <span class="skill-pct">65%</span>
+        </div>
+        <div class="skill-row">
+          <span class="skill-name">AUDIO DESIGN</span>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="width:60%"></div></div>
+          <span class="skill-pct">60%</span>
+        </div>
+        <div class="skill-row">
+          <span class="skill-name">STORYTELLING</span>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="width:78%"></div></div>
+          <span class="skill-pct">78%</span>
+        </div>
+        <div class="skill-row" style="border:none">
+          <span class="skill-name">SOCIAL MEDIA</span>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="width:88%"></div></div>
+          <span class="skill-pct">88%</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services">
+    <span class="section-tag">What I Do</span>
+    <h2 class="section-title">SERVICES</h2>
+
+    <div class="services-grid">
+      <div class="service-card">
+        <span class="service-num">01</span>
+        <div class="service-name">Social Media<br>Editing</div>
+        <p class="service-desc">
+          Fast-paced Reels, TikToks, and YouTube Shorts. Trending transitions,
+          beat-synced cuts, animated captions, and platform-optimized exports.
+        </p>
+      </div>
+      <div class="service-card">
+        <span class="service-num">02</span>
+        <div class="service-name">YouTube<br>Long-form</div>
+        <p class="service-desc">
+          Full YouTube video editing â interviews, vlogs, brand content. B-roll integration,
+          lower thirds, auto-captions, pacing optimized for retention.
+        </p>
+      </div>
+      <div class="service-card">
+        <span class="service-num">03</span>
+        <div class="service-name">Color<br>Grading</div>
+        <p class="service-desc">
+          Cohesive visual identity through professional color work in DaVinci Resolve.
+          Custom LUTs, scene matching, and cinematic tone correction.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <span class="section-tag">Get In Touch</span>
+    <h2 class="section-title">LET'S<br>WORK<br>TOGETHER</h2>
+    <p>
+      Looking for a remote video editor who delivers on time and understands visual storytelling?
+      I'd love to hear about your project.
+    </p>
+    <a class="contact-mail" href="mailto:din@email.com">DIN@EMAIL.COM</a>
+    <div class="social-row">
+      <a class="social-link" href="#">LinkedIn</a>
+      <a class="social-link" href="#">YouTube</a>
+      <a class="social-link" href="#">Behance</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <span>Â© 2026 Lydia â Video Editor</span>
+    <span>Sweden &nbsp;Â·&nbsp; Remote Worldwide</span>
+    <span>Built for Portfolio Use</span>
+  </footer>
+
+</body>
+</html>
