@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lydia â Video Editor</title>
+  <title>Lydia &mdash; Video Editor</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@1,300;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
-    /* ââ Reset & Base ââââââââââââââââââââââââââââââââ */
+    /* &#x2500;&#x2500; Reset & Base &#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500; */
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
@@ -18,11 +18,11 @@
       --grey-d:   #282828;
       --grey-m:   #646464;
       --grey-l:   #A8A8A8;
-      --white:    #E8E8E8;   /* slightly off-white â kills the harsh halation */
-      --blue-deep:   #001040;   /* dark navy â used for bg blocks */
+      --white:    #E8E8E8;   /* slightly off-white &mdash; kills the harsh halation */
+      --blue-deep:   #001040;   /* dark navy &mdash; used for bg blocks */
       --blue-mid:    #0044BB;   /* strong mid-blue */
-      --blue-bright: #0088FF;   /* electric â main CTA */
-      --blue-light:  #44CCFF;   /* cyan-ish â tags & light accents */
+      --blue-bright: #0088FF;   /* electric &mdash; main CTA */
+      --blue-light:  #44CCFF;   /* cyan-ish &mdash; tags & light accents */
       --blue-glow:   rgba(0,136,255,0.10);
       --accent:      #0088FF;
       --accent2:     #0044BB;
@@ -38,12 +38,12 @@
       overflow-x: hidden;
     }
 
-    /* ââ Scrollbar âââââââââââââââââââââââââââââââââââ */
+    /* &#x2500;&#x2500; Scrollbar &#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500; */
     ::-webkit-scrollbar { width: 4px; }
     ::-webkit-scrollbar-track { background: var(--bg); }
     ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
 
-    /* ââ Nav âââââââââââââââââââââââââââââââââââââââââ */
+    /* &#x2500;&#x2500; Nav &#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500; */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; justify-content: space-between; align-items: center;
@@ -81,7 +81,7 @@
     }
     .nav-cta:hover { background: var(--accent); color: var(--white); }
 
-    /* ââ Hero ââââââââââââââââââââââââââââââââââââââââ */
+    /* &#x2500;&#x2500; Hero &#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500; */
     .hero {
       height: 100vh;
       max-height: 100vh;
@@ -200,130 +200,129 @@
 
     /* Stats bar removed */
 
-    /* ââ Section shared ââââââââââââââââââââââââââââââ */
-    section { padding: 7rem 3rem; }
-    .section-tag {
-      font-size: 0.6rem;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: var(--accent);
-      display: block;
-      margin-bottom: 1rem;
-    }
-    .section-title {
-      font-family: 'Bebas Neue', cursive;
-      font-size: clamp(3.5rem, 7vw, 6rem);
-      line-height: 0.95;
-      letter-spacing: 0.02em;
-      color: var(--white);
-    }
-
-    /* ââ Works âââââââââââââââââââââââââââââââââââââââ */
-    #works { background: var(--bg); border-top: 1px solid rgba(0,136,255,0.15); }
-
-    .works-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      margin-bottom: 4rem;
-    }
-    .works-header p {
-      font-size: 0.8rem;
-      color: var(--grey-m);
-      max-width: 300px;
-      line-height: 1.7;
-      padding-bottom: 0.3rem;
-    }
-
-    .works-grid {
+    /* &#x2500;&#x2500; Section shared &#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x0; Hero &#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500; */
+    .hero {
+      height: 100vh;
+      max-height: 100vh;
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1px;
-      background: rgba(255,255,255,0.06);
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr;
+      padding-top: 80px;
+      padding-bottom: 130px; /* matches old stats bar height */
     }
 
-    .work-item {
-      background: var(--bg);
-      position: relative;
-      overflow: hidden;
-      cursor: pointer;
-      group: true;
-    }
-
-    .work-thumb {
-      aspect-ratio: 16/9;
-      background: var(--bg3);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .work-thumb-inner {
-      width: 100%; height: 100%;
-      display: flex; align-items: center; justify-content: center;
-      transition: transform 0.4s ease;
-    }
-    .work-item:hover .work-thumb-inner { transform: scale(1.03); }
-
-    .play-btn {
-      width: 52px; height: 52px;
-      border: 1px solid rgba(255,255,255,0.4);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      transition: background 0.2s, border-color 0.2s;
-      position: absolute;
-      bottom: 1rem; right: 1rem;
-    }
-    .work-item:hover .play-btn {
-      background: var(--accent);
-      border-color: var(--accent);
-    }
-    .play-btn svg { width: 16px; height: 16px; fill: white; margin-left: 3px; }
-
-    .work-info {
-      padding: 1.4rem 1.4rem 1.8rem;
+    .hero-left {
       display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
+      flex-direction: column;
+      justify-content: center;
+      padding: 2rem 3rem 3rem;
+      border-right: 1px solid rgba(255,255,255,0.08);
     }
-    .work-type {
-      font-size: 0.6rem;
-      letter-spacing: 0.2em;
+
+    .hero-eyebrow {
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
       text-transform: uppercase;
       color: var(--blue-light);
-      display: block;
-      margin-bottom: 0.3rem;
+      margin-bottom: 1.2rem;
     }
-    .work-title {
+
+    .hero-name {
       font-family: 'Bebas Neue', cursive;
-      font-size: 1.5rem;
-      letter-spacing: 0.04em;
+      font-size: clamp(5rem, 11vw, 9rem);
+      line-height: 0.92;
+      letter-spacing: 0.02em;
       color: var(--white);
+      margin-bottom: 0.6rem;
     }
-    .work-meta {
-      font-size: 0.65rem;
+
+    .hero-script {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 2.2rem;
+      color: var(--grey-l);
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-desc {
+      font-size: 0.85rem;
+      line-height: 1.8;
       color: var(--grey-m);
-      letter-spacing: 0.12em;
-      text-align: right;
+      max-width: 380px;
+      margin-bottom: 3rem;
     }
 
-    /* work thumb colour fills â multi-tone blues */
-    .fill-1 { background: linear-gradient(135deg, #000A22 0%, #001554 50%, #002280 100%); }
-    .fill-2 { background: linear-gradient(145deg, #001040 0%, #0044BB 60%, #0066EE 100%); }
-    .fill-3 { background: linear-gradient(135deg, #080C14 0%, #0A1628 60%, #0A2050 100%); }
-    .fill-4 { background: linear-gradient(160deg, #001040 0%, #002277 40%, #0088FF 100%); }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      background: var(--accent);
+      color: var(--white);
+      padding: 0.9rem 2rem;
+      transition: background 0.2s, transform 0.15s;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: var(--accent2); transform: translateY(-1px); }
+    .btn-secondary {
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--white);
+      border: 1px solid var(--grey-d);
+      padding: 0.9rem 2rem;
+      transition: border-color 0.2s, transform 0.15s;
+      display: inline-block;
+    }
+    .btn-secondary:hover { border-color: var(--white); transform: translateY(-1px); }
 
-    .fill-1 .work-thumb-inner::before,
-    .fill-2 .work-thumb-inner::before,
-    .fill-3 .work-thumb-inner::before,
-    .fill-4 .work-thumb-inner::before {
-      content: attr(data-label);
-      font-family: 'Bebas Neue', cursive;
-      font-size: 4rem;
-      color: rgba(255,255,255,0.06);
-      letter-spacing: 0.1em;
+    .hero-right {
+      position: relative;
+      display: grid;
+      grid-template-rows: 1fr 1fr;
     }
 
-    /* ââ About âââââââââââââââââââââââââââââââââââââââ */
+    .hero-img-top {
+      background: var(--bg3);
+      overflow: hidden;
+      position: relative;
+    }
+    .hero-img-top::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(0,16,64,0.55) 0%, rgba(0,68,187,0.12) 60%, transparent 100%);
+    }
+
+    .hero-img-bottom {
+      background: var(--grey-d);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    /* placeholder rects for mockup images */
+    .img-placeholder {
+      width: 100%; height: 100%;
+      background: var(--bg3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.65rem; letter-spacing: 0.2em; color: var(--grey-m);
+      text-transform: uppercase;
+    }
+    .img-placeholder.dark  { background: #0F0F0F; }
+    .img-placeholder.mid   { background: #1A1A1A; }
+    .img-placeholder.label {
+      position: absolute; bottom: 1rem; left: 1rem;
+      background: none; height: auto; width: auto;
+      font-size: 0.6rem; color: var(--grey-l); letter-spacing: 0.18em;
+    }
+
+    /* Stats bar removed */
+
+    /* &#x2500;&#x2500; Section shared &#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#xng: 0.1em;
+    }
+
+    /* &#x2500;&#x2500; About &#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500; */
     #about {
       background: var(--bg2);
       border-top: 1px solid rgba(255,255,255,0.06);
@@ -405,7 +404,7 @@
       text-align: right;
     }
 
-    /* ââ Services ââââââââââââââââââââââââââââââââââââ */
+    /* &#x2500;&#x2500; Services &#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500; */
     #services {
       background: var(--bg);
       border-top: 1px solid rgba(255,255,255,0.06);
@@ -449,7 +448,7 @@
       color: var(--grey-m);
     }
 
-    /* ââ Contact âââââââââââââââââââââââââââââââââââââ */
+    /* &#x2500;&#x2500; Contact &#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500; */
     #contact {
       background: var(--bg2);
       border-top: 1px solid rgba(255,255,255,0.06);
@@ -496,7 +495,7 @@
     }
     .social-link:hover { color: var(--white); }
 
-    /* ââ Footer ââââââââââââââââââââââââââââââââââââââ */
+    /* &#x2500;&#x2500; Footer &#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500; */
     footer {
       padding: 2rem 3rem;
       border-top: 1px solid rgba(255,255,255,0.06);
@@ -514,13 +513,13 @@
 
   <!-- Navigation -->
   <nav>
-    <a class="nav-logo" href="#">LJ &nbsp;â&nbsp; VIDEO EDITOR</a>
+    <a class="nav-logo" href="#">LJ &nbsp;&mdash;&nbsp; VIDEO EDITOR</a>
     <ul class="nav-links">
       <li><a href="#works">Works</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#services">Services</a></li>
     </ul>
-    <a class="nav-cta" href="#contact">Let's work â</a>
+    <a class="nav-cta" href="#contact">Let's work &rarr;</a>
   </nav>
 
   <!-- Hero -->
@@ -534,12 +533,12 @@
 
       <p class="hero-desc">
         Crafting fast-paced social media edits and cinematic long-form
-        content that keeps audiences engaged â from brand Reels to
-        full-length YouTube videos. Based in Sweden &nbsp;Â·&nbsp; Available remotely worldwide.
+        content that keeps audiences engaged &mdash; from brand Reels to
+        full-length YouTube videos. Based in Sweden &nbsp;&middot;&nbsp; Available remotely worldwide.
       </p>
 
       <div class="hero-btns">
-        <a class="btn-primary" href="#works">View my work â</a>
+        <a class="btn-primary" href="#works">View my work &darr;</a>
         <a class="btn-secondary" href="#contact">Get in touch</a>
       </div>
     </div>
@@ -573,7 +572,7 @@
         <span class="section-tag">Selected Work</span>
         <h2 class="section-title">MY<br>WORKS</h2>
       </div>
-      <p>A curated selection of social media edits and long-form content â each built to drive engagement and tell a visual story.</p>
+      <p>A curated selection of social media edits and long-form content &mdash; each built to drive engagement and tell a visual story.</p>
     </div>
 
     <div class="works-grid">
@@ -668,8 +667,8 @@
       <div class="about-left">
         <p>
           I'm Lydia, a video editor based in Sweden with a passion for fast-paced
-          storytelling and cinematic visual language. I specialize in social media content â
-          Reels, TikToks, and YouTube Shorts â as well as long-form YouTube edits that hold
+          storytelling and cinematic visual language. I specialize in social media content &mdash;
+          Reels, TikToks, and YouTube Shorts &mdash; as well as long-form YouTube edits that hold
           audiences from first frame to last.
         </p>
         <div class="about-pull">
@@ -677,7 +676,7 @@
         </div>
         <p>
           I work primarily in DaVinci Resolve, bringing a sharp eye for pacing, color grading,
-          and motion â translating raw footage into content that actually converts.
+          and motion &mdash; translating raw footage into content that actually converts.
           Available for full-time remote positions.
         </p>
         <div class="tools-list">
@@ -744,7 +743,7 @@
         <span class="service-num">02</span>
         <div class="service-name">YouTube<br>Long-form</div>
         <p class="service-desc">
-          Full YouTube video editing â interviews, vlogs, brand content. B-roll integration,
+          Full YouTube video editing &mdash; interviews, vlogs, brand content. B-roll integration,
           lower thirds, auto-captions, pacing optimized for retention.
         </p>
       </div>
@@ -777,8 +776,8 @@
 
   <!-- Footer -->
   <footer>
-    <span>Â© 2026 Lydia â Video Editor</span>
-    <span>Sweden &nbsp;Â·&nbsp; Remote Worldwide</span>
+    <span>&copy; 2026 Lydia &mdash; Video Editor</span>
+    <span>Sweden &nbsp;&middot;&nbsp; Remote Worldwide</span>
     <span>Built for Portfolio Use</span>
   </footer>
 
