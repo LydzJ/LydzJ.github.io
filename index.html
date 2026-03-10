@@ -200,126 +200,127 @@
 
     /* Stats bar removed */
 
-    /* &#x2500;&#x2500; Section shared &#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x0; Hero &#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500; */
-    .hero {
-      height: 100vh;
-      max-height: 100vh;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: 1fr;
-      padding-top: 80px;
-      padding-bottom: 130px; /* matches old stats bar height */
-    }
-
-    .hero-left {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 2rem 3rem 3rem;
-      border-right: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .hero-eyebrow {
-      font-size: 0.65rem;
-      letter-spacing: 0.25em;
+    /* &#x2500;&#x2500; Section shared &#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500; */
+    section { padding: 7rem 3rem; }
+    .section-tag {
+      font-size: 0.6rem;
+      letter-spacing: 0.28em;
       text-transform: uppercase;
-      color: var(--blue-light);
-      margin-bottom: 1.2rem;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 1rem;
     }
-
-    .hero-name {
+    .section-title {
       font-family: 'Bebas Neue', cursive;
-      font-size: clamp(5rem, 11vw, 9rem);
-      line-height: 0.92;
+      font-size: clamp(3.5rem, 7vw, 6rem);
+      line-height: 0.95;
       letter-spacing: 0.02em;
       color: var(--white);
-      margin-bottom: 0.6rem;
     }
 
-    .hero-script {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: 2.2rem;
-      color: var(--grey-l);
-      margin-bottom: 2.5rem;
-    }
+    /* &#x2500;&#x2500; Works &#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500; */
+    #works { background: var(--bg); border-top: 1px solid rgba(0,136,255,0.15); }
 
-    .hero-desc {
-      font-size: 0.85rem;
-      line-height: 1.8;
+    .works-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 4rem;
+    }
+    .works-header p {
+      font-size: 0.8rem;
       color: var(--grey-m);
-      max-width: 380px;
-      margin-bottom: 3rem;
+      max-width: 300px;
+      line-height: 1.7;
+      padding-bottom: 0.3rem;
     }
 
-    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
-    .btn-primary {
-      font-size: 0.7rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      text-decoration: none;
-      background: var(--accent);
-      color: var(--white);
-      padding: 0.9rem 2rem;
-      transition: background 0.2s, transform 0.15s;
-      display: inline-block;
-    }
-    .btn-primary:hover { background: var(--accent2); transform: translateY(-1px); }
-    .btn-secondary {
-      font-size: 0.7rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      text-decoration: none;
-      color: var(--white);
-      border: 1px solid var(--grey-d);
-      padding: 0.9rem 2rem;
-      transition: border-color 0.2s, transform 0.15s;
-      display: inline-block;
-    }
-    .btn-secondary:hover { border-color: var(--white); transform: translateY(-1px); }
-
-    .hero-right {
-      position: relative;
+    .works-grid {
       display: grid;
-      grid-template-rows: 1fr 1fr;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: rgba(255,255,255,0.06);
     }
 
-    .hero-img-top {
-      background: var(--bg3);
+    .work-item {
+      background: var(--bg);
+      position: relative;
       overflow: hidden;
-      position: relative;
-    }
-    .hero-img-top::after {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(135deg, rgba(0,16,64,0.55) 0%, rgba(0,68,187,0.12) 60%, transparent 100%);
+      cursor: pointer;
+      group: true;
     }
 
-    .hero-img-bottom {
-      background: var(--grey-d);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-    }
-
-    /* placeholder rects for mockup images */
-    .img-placeholder {
-      width: 100%; height: 100%;
+    .work-thumb {
+      aspect-ratio: 16/9;
       background: var(--bg3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .work-thumb-inner {
+      width: 100%; height: 100%;
       display: flex; align-items: center; justify-content: center;
-      font-size: 0.65rem; letter-spacing: 0.2em; color: var(--grey-m);
+      transition: transform 0.4s ease;
+    }
+    .work-item:hover .work-thumb-inner { transform: scale(1.03); }
+
+    .play-btn {
+      width: 52px; height: 52px;
+      border: 1px solid rgba(255,255,255,0.4);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s, border-color 0.2s;
+      position: absolute;
+      bottom: 1rem; right: 1rem;
+    }
+    .work-item:hover .play-btn {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+    .play-btn svg { width: 16px; height: 16px; fill: white; margin-left: 3px; }
+
+    .work-info {
+      padding: 1.4rem 1.4rem 1.8rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+    .work-type {
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
+      color: var(--blue-light);
+      display: block;
+      margin-bottom: 0.3rem;
     }
-    .img-placeholder.dark  { background: #0F0F0F; }
-    .img-placeholder.mid   { background: #1A1A1A; }
-    .img-placeholder.label {
-      position: absolute; bottom: 1rem; left: 1rem;
-      background: none; height: auto; width: auto;
-      font-size: 0.6rem; color: var(--grey-l); letter-spacing: 0.18em;
+    .work-title {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 1.5rem;
+      letter-spacing: 0.04em;
+      color: var(--white);
+    }
+    .work-meta {
+      font-size: 0.65rem;
+      color: var(--grey-m);
+      letter-spacing: 0.12em;
+      text-align: right;
     }
 
-    /* Stats bar removed */
+    /* work thumb colour fills &mdash; multi-tone blues */
+    .fill-1 { background: linear-gradient(135deg, #000A22 0%, #001554 50%, #002280 100%); }
+    .fill-2 { background: linear-gradient(145deg, #001040 0%, #0044BB 60%, #0066EE 100%); }
+    .fill-3 { background: linear-gradient(135deg, #080C14 0%, #0A1628 60%, #0A2050 100%); }
+    .fill-4 { background: linear-gradient(160deg, #001040 0%, #002277 40%, #0088FF 100%); }
 
-    /* &#x2500;&#x2500; Section shared &#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#xng: 0.1em;
+    .fill-1 .work-thumb-inner::before,
+    .fill-2 .work-thumb-inner::before,
+    .fill-3 .work-thumb-inner::before,
+    .fill-4 .work-thumb-inner::before {
+      content: attr(data-label);
+      font-family: 'Bebas Neue', cursive;
+      font-size: 4rem;
+      color: rgba(255,255,255,0.06);
+      letter-spacing: 0.1em;
     }
 
     /* &#x2500;&#x2500; About &#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500; */
@@ -448,7 +449,7 @@
       color: var(--grey-m);
     }
 
-    /* &#x2500;&#x2500; Contact &#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500; */
+    /* &#x2500;&#x2500; Contact &#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500; */
     #contact {
       background: var(--bg2);
       border-top: 1px solid rgba(255,255,255,0.06);
@@ -766,11 +767,11 @@
       Looking for a remote video editor who delivers on time and understands visual storytelling?
       I'd love to hear about your project.
     </p>
-    <a class="contact-mail" href="mailto:din@email.com">DIN@EMAIL.COM</a>
+    <a class="contact-mail" href="mailto:lydiajonasson@gmail.com">LYDIAJONASSON@GMAIL.COM</a>
     <div class="social-row">
       <a class="social-link" href="#">LinkedIn</a>
       <a class="social-link" href="#">YouTube</a>
-      <a class="social-link" href="#">Behance</a>
+      <a class="social-link" href="#">Vimeo</a>
     </div>
   </section>
 
@@ -778,7 +779,7 @@
   <footer>
     <span>&copy; 2026 Lydia &mdash; Video Editor</span>
     <span>Sweden &nbsp;&middot;&nbsp; Remote Worldwide</span>
-    <span>Built for Portfolio Use</span>
+    <span>Open to Remote Opportunities</span>
   </footer>
 
 </body>
